@@ -6,11 +6,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
+import tacos.Taco;
+import tacos.Ingredient;
 import tacos.Ingredient.Type;
 
 @Slf4j
@@ -33,18 +36,21 @@ public class DesignTacoController {
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
         Type[] types = Ingredient.Type.values();
+        
         for (Type type : types) {
+            
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
+        
         model.addAttribute("design", new Taco());
         return "design";
     }
 
-    private List<Ingredient> filterByType(
-            List<Ingredient> ingredients, Type type) {
+    private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients
                 .stream()
+//                .filter(x -> ( x.getType() != null ) ? x.getType().equals(type): Type.WRAP != null)
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
     }
