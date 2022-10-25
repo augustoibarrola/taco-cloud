@@ -50,7 +50,8 @@ public class DesignTacoController {
     
     @PostMapping
     public String processDesign(Taco design) {
-        System.out.println("Processing design: " + design);
+//        System.out.println("Processing design: " + design);
+        log.info("Processing design: " + design);
         
         return "redirect:/orders/current";
     }
