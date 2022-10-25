@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,11 +47,17 @@ public class DesignTacoController {
         model.addAttribute("design", new Taco());
         return "design";
     }
+    
+    @PostMapping
+    public String processDesign(Taco design) {
+        System.out.println("Processing design: " + design);
+        
+        return "redirect:/orders/current";
+    }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients
                 .stream()
-//                .filter(x -> ( x.getType() != null ) ? x.getType().equals(type): Type.WRAP != null)
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
     }
