@@ -45,6 +45,8 @@
 			<artifactId>htmlunit-driver</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Installed as a dependency as well as installed 
+		on Eclipse IDE: https://projectlombok.org/setup/eclipse -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
