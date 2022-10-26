@@ -24,36 +24,44 @@
 		<h3>Deliver my taco masterpieces to ...</h3>
 		
 		<label for="name">Name: </label> <input type="text" th:field="*{name}" />
+		<span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> Name Can't be Empty </span> 
 		<br> 
 		
 		<label for="street"> Street Address: </label> 
 		<input type="text" th:field="*{street}" /> 
+		<span class="validationError" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"> Street Can't be Empty </span> 
 		<br> 
 		
 		<label for="city"> City: </label> 
 		<input type="text" th:field="*{city}" /> 
+		<span class="validationError" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> City Can't be Empty </span> 
 		<br> 
 		
 		<label for="state"> State:</label> 
 		<input type="text" th:field="*{state}" /> 
+		<span class="validationError" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"> State Can't be Empty </span> 
 		<br> 
 		
 		<label for="zip"> Zip Code: </label> 
-		<input type="text" th:field="*{zip}" /> 
+		<input type="text" th:field="*{zip}" />
+		<span class="validationError" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> Zip Code Can't be Empty </span>  
 		<br>
 
 		<h3>Here's How I'll Pay ...</h3>
 		
 		<label for="ccNumber"> Credit Card #: </label> 
-		<input type="text" th:field="*{ccNumber}" /> 
+		<input type="text" th:field="*{ccNumber}" />
+		<span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}"> CC Number Error </span> 
 		<br>
 		
 		<label for="ccExpiration"> Expiration: </label> 
-		<input type="text" th:field="*{ccExpiration}" /> 
+		<input type="text" th:field="*{ccExpiration}" />
+		<span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}"> CC Expiration Date Invalid </span>  
 		<br> 
 		
 		<label for="ccCVV">CVV: </label> 
-		<input type="text" th:field="*{ccCVV}" /> 
+		<input type="text" th:field="*{ccCVV}" />
+		<span class="validationError" th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}"> CVV Invalid </span>  
 		<br>
 
 		<input type="submit" value="Submit Order" />
