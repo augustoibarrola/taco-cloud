@@ -1,4 +1,6 @@
-package tacos;
+package tacos.repository;
+
+import tacos.domain.Ingredient;
 
 public interface IngredientRepository {
     
