@@ -20,12 +20,12 @@ public class Taco {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     
     private Date createdAt;
     
     @NotNull
-    @Size(min=5, message="Name must be at least 4 characters long")
+    @Size(min=4, message="Name must be at least 4 characters long")
     private String name;
     
     @ManyToMany(targetEntity=Ingredient.class)

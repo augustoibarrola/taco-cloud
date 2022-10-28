@@ -11,14 +11,16 @@
 	<img th:src="@{/images/TacoCloud.jpeg}" />
 
 
-	<form method="POST" th:object="${design}">
+	<form method="POST" th:object="${taco}">
 		<div class="grid">
 
 
 			<div class="ingredient-group" id="wraps">
 				<h3>Design Your Wrap:</h3>
 				<div th:each="ingredient : ${wrap}">
-					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> 
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
+			<!-- 		<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" />  -->
+					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
 					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
 					<br>
 				</div>
@@ -28,7 +30,9 @@
 			<div class="ingredient-group" id="proteins">
 				<h3>Pick Your Protein:</h3>
 				<div th:each="ingredient : ${protein}">
-					<input name="ingredients" type="checkbox" th:value="${ingredient.id}" /> 
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> -->
+					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
 					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
 					<br>
 				</div>
@@ -37,7 +41,9 @@
 			<div class="ingredient-group" id="cheeses">
 				<h3>Pick Your Cheese:</h3>
 				<div th:each="ingredient : ${cheese}">
-					<input name="ingredients" type="checkbox" th:value="${ingredient.id}" /> 
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> -->
+					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
 					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
 					<br>
 				</div>
@@ -46,7 +52,9 @@
 			<div class="ingredient-group" id="veggies">
 				<h3>Pick Your Veggies:</h3>
 				<div th:each="ingredient : ${veggies}">
-					<input name="ingredients" type="checkbox" th:value="${ingredient.id}" /> 
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" /> -->
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" />  -->
+					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
 					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
 					<br>
 				</div>
@@ -55,7 +63,9 @@
 			<div class="ingredient-group" id="sauces">
 				<h3>Pick Your Sauces:</h3>
 				<div th:each="ingredient : ${sauce}">
-					<input name="ingredients" type="checkbox" th:value="${ingredient.id}" /> 
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
+					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> -->
+					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
 					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
 					<br>
 				</div>

@@ -63,16 +63,22 @@ public class DesignTacoController {
         
         for (Type type : types) {
             
-            model.addAttribute(type.toString().toLowerCase(),
-                    filterByType(ingredients, type));
+            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+            
+//            model.addAttribute(filterByType(ingredients, type));
         }
         
-        model.addAttribute("design", new Taco());
+        model.addAttribute("taco", new Taco());
         return "design";
     }
     
     @PostMapping
     public String processDesign(@Valid Taco design, @ModelAttribute Order order, Errors errors) {
+        
+        
+        log.info("design: " + design);
+        log.info("order: " + order);
+        log.warn("errors: " + errors);
         
         if(errors.hasErrors()) return "design";
         

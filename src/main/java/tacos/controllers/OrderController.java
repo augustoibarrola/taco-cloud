@@ -26,7 +26,10 @@ public class OrderController {
     public OrderController(OrderRepository orderRepo) {this.orderRepo = orderRepo;}
     
     @GetMapping("/current")
-    public String orderForm(Model model) {return "orderForm";}
+    public String orderForm(Model model) {
+        log.info(model.toString());
+        return "orderForm";
+        }
     
     @PostMapping
     public String processOrder(@Valid Order order, SessionStatus sessionStatus, Errors error) {
