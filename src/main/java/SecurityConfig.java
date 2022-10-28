@@ -13,10 +13,10 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
 //    @Autowired
 //    DataSource datasource;
-    
+
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         
@@ -114,6 +114,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          * Remote LDAP-Backed User Store with configured query base and password comparison for non-standard
          * password attribute name
          */
+//        authenticationManagerBuilder
+//            .ldapAuthentication()
+//                .userSearchBase("ou=people")
+//                .userSearchFilter("(uid={0)")
+//                .groupSearchBase("ou=groups")
+//                .groupSearchFilter("member={0}")
+//                .passwordCompare()
+//                .passwordEncoder(new BCryptPasswordEncoder())
+//                .passwordAttribute("passcode")
+//                .contextSource()
+//                    .url("ldap://tacocloud.com:389/dc=tacocloud,dc=com");
+        
+        /*
+         * Embedded LDAP-Backed User Store with configured query base and password comparison for non-standard
+         * password attribute name
+         */
         authenticationManagerBuilder
             .ldapAuthentication()
                 .userSearchBase("ou=people")
@@ -124,7 +140,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .passwordAttribute("passcode")
                 .contextSource()
-                    .url("ldap://tacocloud.com:389/dc=tacocloud,dc=com");
+                .root("dc=tacocloud,dc=com");
+                .ldif("classpath:src/main/resources/users.ldif");
+
     }
 
 }
