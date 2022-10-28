@@ -1,7 +1,7 @@
 create table if not exists Ingredient (
-	id varchar(4) not null,
+	id varchar(10) not null,
 	name varchar(25) not null, 
-	type varchar(10) not null
+	INGREDIENT_TYPE ENUM('WRAP', 'PROTEIN', 'VEGGIES', 'CHEESE', 'SAUCE') NOT NULL	
 );
 
 create table if not exists Taco (

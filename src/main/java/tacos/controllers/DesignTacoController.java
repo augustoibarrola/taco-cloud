@@ -57,6 +57,8 @@ public class DesignTacoController {
         
         ingredientRepo.findAll().forEach(i -> ingredients.add(i));
         
+        log.info(ingredients.toString());
+        
         Type[] types = Ingredient.Type.values();
         
         for (Type type : types) {
@@ -84,7 +86,7 @@ public class DesignTacoController {
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients
                 .stream()
-                .filter(x -> x.getType().equals(type))
+                .filter(x -> x.getIngredientType().equals(type))
                 .collect(Collectors.toList());
     }
 
