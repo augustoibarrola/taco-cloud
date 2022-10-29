@@ -1,12 +1,16 @@
+package tacos.security;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @SuppressWarnings("deprecation")
@@ -16,6 +20,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Autowired
 //    DataSource datasource;
+    
+    @Autowired
+    UserDetailsService userDetailsService;
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new StandardPasswordEncoder("53cr3t");
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -130,18 +142,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          * Embedded LDAP-Backed User Store with configured query base and password comparison for non-standard
          * password attribute name
          */
+//        authenticationManagerBuilder
+//            .ldapAuthentication()
+//                .userSearchBase("ou=people")
+//                .userSearchFilter("(uid={0)")
+//                .groupSearchBase("ou=groups")
+//                .groupSearchFilter("member={0}")
+//                .passwordCompare()
+//                .passwordEncoder(new BCryptPasswordEncoder())
+//                .passwordAttribute("passcode")
+//                .contextSource()
+//                .root("dc=tacocloud,dc=com")
+//                .ldif("classpath:src/main/resources/users.ldif");
+        
         authenticationManagerBuilder
-            .ldapAuthentication()
-                .userSearchBase("ou=people")
-                .userSearchFilter("(uid={0)")
-                .groupSearchBase("ou=groups")
-                .groupSearchFilter("member={0}")
-                .passwordCompare()
-                .passwordEncoder(new BCryptPasswordEncoder())
-                .passwordAttribute("passcode")
-                .contextSource()
-                .root("dc=tacocloud,dc=com");
-                .ldif("classpath:src/main/resources/users.ldif");
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(passwordEncoder());
 
     }
 
