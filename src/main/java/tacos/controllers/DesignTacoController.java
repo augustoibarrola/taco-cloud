@@ -68,7 +68,7 @@ public class DesignTacoController {
 //            model.addAttribute(filterByType(ingredients, type));
         }
         
-        model.addAttribute("taco", new Taco());
+//        model.addAttribute("taco", new Taco());
         return "design";
     }
     

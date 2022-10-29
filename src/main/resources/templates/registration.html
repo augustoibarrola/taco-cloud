@@ -11,7 +11,7 @@
 
 <h1> Registration </h1>
 	<img th:src="@{/images/TacoCloud.jpeg}" />
-<form method="POST" th:action="@{/register}" id="registerForm">
+<form method="POST" th:action="@{/auth}" id="registerForm">
 
 	<label for="username"> Usernane: </label>
 	<input type="text" name="username">
@@ -51,5 +51,8 @@
 	<input type="submit" value="Register" />
 </form>
 
+	<form method="POST" th:action="@{/logout}">
+	<input type="submit" value="Logout"/>
+	</form>
 </body>
 </html>

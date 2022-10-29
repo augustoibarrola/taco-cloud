@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,26 +18,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-
-@Data
-@RequiredArgsConstructor
-@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 @Entity
+@Data
+//@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+@RequiredArgsConstructor
 public class User implements UserDetails {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private static final long serialVersionUID = 1L;
-
-
-    private final String username;
-    private final String password;
-    private final String fullname;
-    private final String street;
-    private final String city;
-    private final String state;
-    private final String zip;
-    private final String phoneNumber;
+    
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private  String username;
+    private  String password;
+    private  String fullname;
+    private  String street;
+    private  String city;
+    private  String state;
+    private  String zip;
+    private  String phoneNumber;
     
     
     
@@ -81,6 +81,11 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         // TODO Auto-generated method stub
         return true;
+    }
+
+    public User(String username2, String encode, String fullname2, String street2, String city2, String state2,
+            String zip2, String phone) {
+        // TODO Auto-generated constructor stub
     }
 
 //    public User(String username2, String encode, String fullname2, String street2, String city2, String state2,
