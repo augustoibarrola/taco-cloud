@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @Data
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
 @Entity
 public class User implements UserDetails {
@@ -82,5 +82,10 @@ public class User implements UserDetails {
         // TODO Auto-generated method stub
         return true;
     }
+
+//    public User(String username2, String encode, String fullname2, String street2, String city2, String state2,
+//            String zip2, String phone) {
+//        // TODO Auto-generated constructor stub
+//    }
 
 }
