@@ -2,8 +2,10 @@ package tacos.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import lombok.Data;
 import tacos.domain.User;
 
+@Data
 public class RegistrationService {
 
     private String username;
