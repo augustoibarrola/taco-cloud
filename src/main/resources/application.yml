@@ -17,3 +17,10 @@ spring:
     sql:
         init: 
             mode: always
+            
+server:
+    port: 8443
+    ssl: 
+      key-store: file:///Users/augustoibarrola/Development/taco-cloud-eclipse-workspace/mykeys.jks
+      key-store-password: kirakira12
+      key-password: kirakira12
