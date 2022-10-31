@@ -15,11 +15,26 @@ public class RegistrationService {
     private String city;
     private String state;
     private String zip;
-    private String phone;
+    private String phoneNumber;
     
     public User toUser(PasswordEncoder passwordEncoder) {
 
-        return new User(username, passwordEncoder.encode(password), fullname, street, city, state, zip, phone);
+        return new User(username, passwordEncoder.encode(password), fullname, street, city, state, zip, phoneNumber);
+    }
+    
+    @Override
+    public String toString() {
+        return "RegistrationService : [" + 
+                " username: " + this.username +
+                " password: " + this.password +
+                " fullname: " + this.fullname +
+                " street: " + this.street +
+                " city: " + this.city +
+                " state: " + this.state +
+                " zip: " + this.zip +
+                " phoneNumber: " + this.phoneNumber +
+                " ]"
+                ;
     }
 
 }

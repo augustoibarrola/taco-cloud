@@ -1,3 +1,15 @@
+create table if not exists User (
+	id varchar(50) not null, 
+	username varchar(50) not null,
+	password varchar(50) not null, 
+	fullname varchar(50) not null, 
+	street varchar(50) not null, 
+	city varchar(50) not null, 
+	state varchar(50) not null, 
+	zip varchar(50) not null, 
+	phone_number varchar(50) not null
+);
+
 create table if not exists Ingredient (
 	id varchar(10) not null,
 	name varchar(25) not null, 
