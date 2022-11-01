@@ -8,20 +8,26 @@
 
 <body>
 	<h1>Design Your Taco</h1>
+	<h2>
+		Feelin' hungry, <span th:text="${user.fullname}">NAME</span>?
+	</h2>
 	<img th:src="@{/images/TacoCloud.jpeg}" />
 
+	<form method="POST" th:object="${design}" th:action="@{/design}"
+		id="tacoForm">
 
-	<form method="POST" th:object="${taco}">
+		<span class="validationError"
+			th:if="${#fields.hasErrors('ingredients')}"
+			th:errors="*{ingredients}">Ingredient Error</span>
+
 		<div class="grid">
 
 
 			<div class="ingredient-group" id="wraps">
-				<h3>Design Your Wrap:</h3>
+				<h3>Designate Your Wrap:</h3>
 				<div th:each="ingredient : ${wrap}">
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
-			<!-- 		<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" />  -->
-					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
-					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
+					<input name="ingredients" type="checkbox"
+						th:value="${ingredient.id}" /> <span th:text="${ingredient.name}">INGREDIENT</span>
 					<br>
 				</div>
 			</div>
@@ -30,10 +36,8 @@
 			<div class="ingredient-group" id="proteins">
 				<h3>Pick Your Protein:</h3>
 				<div th:each="ingredient : ${protein}">
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> -->
-					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
-					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
+					<input name="ingredients" type="checkbox"
+						th:value="${ingredient.id}" /> <span th:text="${ingredient.name}">INGREDIENT</span>
 					<br>
 				</div>
 			</div>
@@ -41,10 +45,8 @@
 			<div class="ingredient-group" id="cheeses">
 				<h3>Pick Your Cheese:</h3>
 				<div th:each="ingredient : ${cheese}">
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> -->
-					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
-					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
+					<input name="ingredients" type="checkbox"
+						th:value="${ingredient.id}" /> <span th:text="${ingredient.name}">INGREDIENT</span>
 					<br>
 				</div>
 			</div>
@@ -52,10 +54,8 @@
 			<div class="ingredient-group" id="veggies">
 				<h3>Pick Your Veggies:</h3>
 				<div th:each="ingredient : ${veggies}">
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" /> -->
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" />  -->
-					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
-					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
+					<input name="ingredients" type="checkbox"
+						th:value="${ingredient.id}" /> <span th:text="${ingredient.name}">INGREDIENT</span>
 					<br>
 				</div>
 			</div>
@@ -63,10 +63,8 @@
 			<div class="ingredient-group" id="sauces">
 				<h3>Pick Your Sauces:</h3>
 				<div th:each="ingredient : ${sauce}">
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />  -->
-					<!-- <input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" /> -->
-					<input name="ingredients" type="checkbox" th:value="${ingredient.getId()}" th:field="*{ingredients}" />
-					<span th:text="${ingredient.getName()}">INGREDIENT</span> 
+					<input name="ingredients" type="checkbox"
+						th:value="${ingredient.id}" /> <span th:text="${ingredient.name}">INGREDIENT</span>
 					<br>
 				</div>
 			</div>
@@ -74,16 +72,18 @@
 
 		<div>
 			<h3>Name Your Taco Creation:</h3>
-			
-			<input type="text" th:field="*{name}" /> <br>
-			
+
+			<input type="text" th:field="*{name}" /> <span
+				class="validationError" th:if="${#fields.hasErrors('name')}"
+				th:errors="*{name}">Name Error</span> <br>
+
 			<button>Submit Your Taco</button>
 		</div>
 
 	</form>
-	
-	<form method="POST" th:action="@{/logout}">
-	<input type="submit" value="Logout"/>
+
+	<form method="POST" th:action="@{/logout}" id="logoutForm">
+		<input type="submit" value="Logout" />
 	</form>
 </body>
 
