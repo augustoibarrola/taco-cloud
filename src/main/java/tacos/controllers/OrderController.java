@@ -4,6 +4,10 @@ import javax.validation.Valid;
 
 //import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,7 +26,10 @@ import tacos.repository.OrderRepository;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
+@ConfigurationProperties(prefix="taco.orders")
 public class OrderController {
+    
+    private int pageSize = 20;
     
     private OrderRepository orderRepo;
     
@@ -34,6 +41,20 @@ public class OrderController {
         return "orderForm";
         }
     
+    @GetMapping
+    public String ordersForUser(
+            @AuthenticationPrincipal User user, 
+            Model model) 
+    {
+        
+        Pageable pageable = PageRequest.of(0, pageSize);
+        
+        model.addAttribute("orders", orderRepo.findByuserOrderByPlacedAtDesc(user, pageable));
+        
+        return "orderList";
+    }
+    
+    
     @PostMapping
     public String processOrder(
             @Valid Order order, 
@@ -41,7 +62,6 @@ public class OrderController {
             SessionStatus sessionStatus, 
             Errors error) 
     {
-        
         if(error.hasErrors()) return "orderForm";
         
         order.setUser(user);
