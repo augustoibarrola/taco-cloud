@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-// Chapter 5.3: Configuring with Profiles  
+// Chapter 5.3.1: Defining Profile-Specific Properties  
 
 @SpringBootApplication
 public class TacoCloudApplication {
