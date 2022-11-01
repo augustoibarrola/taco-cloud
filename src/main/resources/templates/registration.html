@@ -12,7 +12,7 @@
 <h1> Registration </h1>
 	<img th:src="@{/images/TacoCloud.jpeg}" />
 	
-<form method="POST" th:action="@{/auth/}" id="registerForm" th:object="${registrationService}">
+<form method="POST" th:action="@{/auth}" id="registerForm" th:object="${registrationService}">
 
 	<label for="username"> Usernane: </label>
 	<input type="text" name="username">

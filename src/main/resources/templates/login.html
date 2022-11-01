@@ -17,8 +17,7 @@
 
 	<p>New here? Click <a th:href="@{/auth}">here</a> to register.</p>
 
-	<form method="POST" th:action="@{/auth/welcome}" id="loginForm" th:object="${userLogin}">
-
+	<form method="POST" th:action="@{/login}" id="loginForm">
 
 		<label for="username">Username: </label>
 		<input type="text" name="username" id="username"/>

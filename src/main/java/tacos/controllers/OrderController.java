@@ -2,7 +2,6 @@ package tacos.controllers;
 
 import javax.validation.Valid;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,49 +25,44 @@ import tacos.repository.OrderRepository;
 @RequestMapping("/orders")
 @SessionAttributes("order")
 public class OrderController {
-    
+
     private OrderRepository orderRepo;
-    
+
     private OrderProps orderProps;
-    
-    public OrderController(OrderRepository orderRepo, OrderProps orderProps) {
+
+    public OrderController(OrderRepository orderRepo, OrderProps orderProps) 
+    {
         this.orderRepo = orderRepo;
         this.orderProps = orderProps;
-        }
-    
+    }
+
     @GetMapping("/current")
-    public String orderForm(Model model) {
-        log.info(model.toString());
-        return "orderForm";
-        }
-    
-    @GetMapping
-    public String ordersForUser(
-            @AuthenticationPrincipal User user, 
-            Model model) 
+    public String orderForm(Model model) 
     {
+        log.info(model.toString());
         
+        return "orderForm";
+    }
+
+    @GetMapping
+    public String ordersForUser( @AuthenticationPrincipal User user, Model model) 
+    {
         Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
-        
-        model.addAttribute("orders", orderRepo.findByuserOrderByPlacedAtDesc(user, pageable));
-        
+
+        model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+
         return "orderList";
     }
-    
-    
+
     @PostMapping
-    public String processOrder(
-            @Valid Order order, 
-            SessionStatus sessionStatus, 
-            Errors error) 
+    public String processOrder( @Valid Order order, SessionStatus sessionStatus, Errors error) 
     {
-        
-        if(error.hasErrors()) return "orderForm";
-        
+        if (error.hasErrors()) return "orderForm";
+
         orderRepo.save(order);
 
         sessionStatus.setComplete();
-        
+
         return "redirect:/";
     }
 }

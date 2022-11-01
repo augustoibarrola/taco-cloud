@@ -28,14 +28,14 @@ spring:
 #      key-password: kirakira12
 
       
-logging: 
-    path: /var/logs/
-    file: TacoCloud.log
-    level:
-      root: WARN
-      org:
-        springframework:
-          security: DEBUG
+#logging: 
+#    path: /var/logs/
+#    file: TacoCloud.log
+#    level:
+#      root: WARN
+#      org:
+#        springframework:
+#          security: DEBUG
           
 taco:
   orders:
