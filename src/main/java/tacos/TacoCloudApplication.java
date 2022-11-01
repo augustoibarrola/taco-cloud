@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-// Chapter 5.2: Creating Your Own Configuration Properties 
+// Chapter 5.2.1: Defining Configuration Properties Holders 
 
 @SpringBootApplication
 public class TacoCloudApplication {
