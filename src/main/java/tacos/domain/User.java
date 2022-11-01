@@ -90,8 +90,15 @@ public class User implements UserDetails {
         return true;
     }
 
-    public User(String username, String password, String fullname, String street, String city, String state,
-            String zip, String phoneNumber) {
+    public User(
+            String username, 
+            String password, 
+            String fullname, 
+            String street, 
+            String city, 
+            String state,
+            String zip, 
+            String phoneNumber) {
         
         this.username = username;
         this.password = password;

@@ -19,8 +19,6 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    DataSource datasource;
     
     @Autowired
     UserDetailsService userDetailsService;
@@ -31,171 +29,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        
-//        httpSecurity
-//            .authorizeRequests()
-//                .antMatchers("/design", "/orders")
-//                    .hasRole("ROLE_USER")
-//                .antMatchers("/", "/**").permitAll();
-        httpSecurity
-        .authorizeRequests()
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+          .authorizeRequests()
             .antMatchers("/design", "/orders")
-                .access("hasRole('ROLE_USER')")
-            .antMatchers("/", "/**").access("permitAll")
-            .and()
+              .access("hasRole('ROLE_USER')")
+            .antMatchers("/**").access("permitAll")
+            
+          .and()
             .formLogin()
-            .loginPage("/login")
-            .defaultSuccessUrl("/design")
-            .and()
+              .loginPage("/login")
+              
+          .and()
             .logout()
-            .logoutSuccessUrl("/");
-        
-        /*
-         * The below allows access to the h2-console
-         * via the web browser. Without it, we get a 
-         * 403 Forbidden response
-         */
-        httpSecurity
-            .csrf().
-                disable();
-        httpSecurity
+              .logoutSuccessUrl("/")
+              
+          .and()
+            .csrf()
+              .ignoringAntMatchers("/h2-console/**")
+
+          // Allow pages to be loaded in frames from the same origin; needed for H2-Console
+          .and()  
             .headers()
-                .frameOptions()
-                    .disable();
-        
-    }
+              .frameOptions()
+                .sameOrigin()
+          ;
+      }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        
-        /*
-         * In-Memory User Store
-         */
-//        authenticationManagerBuilder
-//            .inMemoryAuthentication()
-//                .withUser("Augusto")
-//                .password("augustopassword")
-//                .authorities("ROLE_USER")
-//            .and()
-//                .withUser("Anastasia")
-//                .password("anastasiapassword")
-//                .authorities("ROLE_USER");
-        
-        /*
-         * JDBC-Based User Store (plain)
-         */
-//        authenticationManagerBuilder
-//            .jdbcAuthentication()
-//                .dataSource(datasource);
-        
-        /*
-         * JDBC-Based User Store (configured queries)
-         */
-//        authenticationManagerBuilder
-//            .jdbcAuthentication()
-//                .dataSource(datasource)
-//                .usersByUsernameQuery(
-//                        "select username, password, enabled from Users " + 
-//                        "where username = ?")
-//                .authoritiesByUsernameQuery(
-//                        "select username, authority from UserAuthorities " + 
-//                        "where username = ?");
-        
-        /*
-         * JDBC-Based User Store (configured for encoded passwords)
-         */
-//        authenticationManagerBuilder
-//            .jdbcAuthentication()
-//                .dataSource(datasource)
-//                .usersByUsernameQuery(
-//                        "select username, password, enabled from Users " + 
-//                        "where username = ?")
-//                .authoritiesByUsernameQuery(
-//                        "select username, authority from UserAuthorities " + 
-//                        "where username = ?")
-//                .passwordEncoder(new StandardPasswordEncoder("53cr3t"));
-        
-        /*
-         * LDAP-Backed User Store
-         */
-//        authenticationManagerBuilder
-//            .ldapAuthentication()
-//                .userSearchFilter("(uid={0)")
-//                .groupSearchFilter("member={0}");
-        
-        /*
-         * LDAP-Backed User Store with configured query base
-         */
-//        authenticationManagerBuilder
-//            .ldapAuthentication()
-//                .userSearchBase("ou=people")
-//                .userSearchFilter("(uid={0)")
-//                .groupSearchBase("ou=groups")
-//                .groupSearchFilter("member={0}");
-        
-        /*
-         * LDAP-Backed User Store with configured query base and password comparison
-         */
-//        authenticationManagerBuilder
-//            .ldapAuthentication()
-//                .userSearchBase("ou=people")
-//                .userSearchFilter("(uid={0)")
-//                .groupSearchBase("ou=groups")
-//                .groupSearchFilter("member={0}")
-//                .passwordCompare();
-        
-        /*
-         * LDAP-Backed User Store with configured query base and password comparison for non-standard
-         * password attribute name
-         */
-//        authenticationManagerBuilder
-//            .ldapAuthentication()
-//                .userSearchBase("ou=people")
-//                .userSearchFilter("(uid={0)")
-//                .groupSearchBase("ou=groups")
-//                .groupSearchFilter("member={0}")
-//                .passwordCompare()
-//                .passwordEncoder(new BCryptPasswordEncoder())
-//                .passwordAttribute("passcode");
-        
-        /*
-         * Remote LDAP-Backed User Store with configured query base and password comparison for non-standard
-         * password attribute name
-         */
-//        authenticationManagerBuilder
-//            .ldapAuthentication()
-//                .userSearchBase("ou=people")
-//                .userSearchFilter("(uid={0)")
-//                .groupSearchBase("ou=groups")
-//                .groupSearchFilter("member={0}")
-//                .passwordCompare()
-//                .passwordEncoder(new BCryptPasswordEncoder())
-//                .passwordAttribute("passcode")
-//                .contextSource()
-//                    .url("ldap://tacocloud.com:389/dc=tacocloud,dc=com");
-        
-        /*
-         * Embedded LDAP-Backed User Store with configured query base and password comparison for non-standard
-         * password attribute name
-         */
-//        authenticationManagerBuilder
-//            .ldapAuthentication()
-//                .userSearchBase("ou=people")
-//                .userSearchFilter("(uid={0)")
-//                .groupSearchBase("ou=groups")
-//                .groupSearchFilter("member={0}")
-//                .passwordCompare()
-//                .passwordEncoder(new BCryptPasswordEncoder())
-//                .passwordAttribute("passcode")
-//                .contextSource()
-//                .root("dc=tacocloud,dc=com")
-//                .ldif("classpath:src/main/resources/users.ldif");
-        
-        authenticationManagerBuilder
-            .userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder());
+    protected void configure(AuthenticationManagerBuilder auth)
+        throws Exception {
 
+      auth
+        .userDetailsService(userDetailsService)
+        .passwordEncoder(passwordEncoder());
+      
     }
 
 }

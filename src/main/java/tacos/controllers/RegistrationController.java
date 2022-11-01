@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
+import tacos.domain.User;
 import tacos.repository.UserRepository;
+import tacos.service.LoginService;
 import tacos.service.RegistrationService;
 
 @Slf4j
@@ -37,6 +39,19 @@ public class RegistrationController {
         log.info(registrationService.toString());
         log.info(registrationService.toUser(passwordEncoder).toString());
         userRepo.save(registrationService.toUser(passwordEncoder));
+        
+        return "redirect:/auth/welcome";
+    }
+    
+    @PostMapping("/welcome")
+    public String userLogin(@ModelAttribute LoginService loginService) {
+        
+        log.info(loginService.toString());
+        
+//        User user = userRepo.findByUsername(loginService.getUsername());
+        
+//        log.info(user.toString());
+        
         return "redirect:/design";
     }
 }
