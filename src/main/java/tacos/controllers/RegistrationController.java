@@ -40,7 +40,7 @@ public class RegistrationController {
         log.info(registrationService.toUser(passwordEncoder).toString());
         userRepo.save(registrationService.toUser(passwordEncoder));
         
-        return "redirect:/auth/welcome";
+        return "redirect:/login";
     }
     
     @PostMapping("/welcome")
@@ -48,9 +48,9 @@ public class RegistrationController {
         
         log.info(loginService.toString());
         
-//        User user = userRepo.findByUsername(loginService.getUsername());
+        User user = userRepo.findByUsername(loginService.getUsername());
         
-//        log.info(user.toString());
+        log.info(user.toString());
         
         return "redirect:/design";
     }

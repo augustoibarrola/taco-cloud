@@ -29,7 +29,7 @@ public class LoginService {
     
     @Override
     public String toString() {        
-        return "User : [" + 
+        return "LoginService : [" + 
             " username: " + this.username +
             " password: " + this.password +
             " ]"
