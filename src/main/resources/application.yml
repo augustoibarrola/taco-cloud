@@ -26,3 +26,18 @@ spring:
 #      key-store: file:///Users/augustoibarrola/Development/taco-cloud-eclipse-workspace/mykeys.jks
 #      key-store-password: kirakira12
 #      key-password: kirakira12
+
+      
+logging: 
+    path: /var/logs/
+    file: TacoCloud.log
+    level:
+      root: WARN
+      org:
+        springframework:
+          security: DEBUG
+          
+taco:
+  orders:
+    pageSize: 10 
+
