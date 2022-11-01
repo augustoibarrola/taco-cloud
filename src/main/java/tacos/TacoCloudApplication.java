@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-// Chapter 5.1.3: Configuring the Embedded Server
+// Chapter 5.1.4: Configuring Logging
 
 @SpringBootApplication
 public class TacoCloudApplication {
