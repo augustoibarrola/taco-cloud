@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-// Chapter 5.2.2: Declaring Configuration Property Metadata  
+// Chapter 5.3: Configuring with Profiles  
 
 @SpringBootApplication
 public class TacoCloudApplication {
