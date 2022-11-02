@@ -18,22 +18,26 @@ spring:
         init: 
             mode: always
             
-server:
-    port: 8443
-    ssl: 
-      key-store: file:///Users/augustoibarrola/Development/taco-cloud-eclipse-workspace/mykeys.jks
-      key-store-password: kirakira12
-      key-password: kirakira12
+# server.port.ssl configurations removed for the moment to 
+# avoid Bad Request or Insecure Connection errors
+#server:
+#    port: 8443
+#    ssl: 
+#      key-store: file:///Users/augustoibarrola/Development/taco-cloud-eclipse-workspace/mykeys.jks
+#      key-store-password: kirakira12
+#      key-password: kirakira12
+
       
-logging: 
-    path: /var/logs/
-    file: TacoCloud.log
-    level:
-      root: WARN
-      org:
-        springframework:
-          security: DEBUG
+#logging: 
+#    path: /var/logs/
+#    file: TacoCloud.log
+#    level:
+#      root: WARN
+#      org:
+#        springframework:
+#          security: DEBUG
           
 taco:
   orders:
     pageSize: 10 
+

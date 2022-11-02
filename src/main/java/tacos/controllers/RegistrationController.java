@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
+import tacos.domain.User;
 import tacos.repository.UserRepository;
+import tacos.service.LoginService;
 import tacos.service.RegistrationService;
 
 @Slf4j
@@ -20,23 +22,48 @@ public class RegistrationController {
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
     
-    public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) {
+    public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) 
+    {   
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
     
+//    @GetMapping
+//    public String registerForm(Model model) 
+//    {   
+//        model.addAttribute(new RegistrationService());
+//        
+//        return "registration";
+//    }
+    
     @GetMapping
-    public String registerForm(Model model) {
+    public String registerForm() {
+      return "registration";
+    }
+    
+    @PostMapping
+    public String processRegistration(RegistrationService registrationService) {
         
-        model.addAttribute(new RegistrationService());
-        return "registration";
+        log.info(registrationService.toString());
+        
+        userRepo.save(registrationService.toUser(passwordEncoder));
+      
+        return "redirect:/login";
     }
 
-    @PostMapping
-    public String processRegistration(@ModelAttribute RegistrationService registrationService) {
-        log.info(registrationService.toString());
-        log.info(registrationService.toUser(passwordEncoder).toString());
-        userRepo.save(registrationService.toUser(passwordEncoder));
-        return "redirect:/design";
-    }
+//    @PostMapping
+//    public String processRegistration(@ModelAttribute RegistrationService registrationService) 
+//    {    
+//        userRepo.save(registrationService.toUser(passwordEncoder));
+//        
+//        return "redirect:/";
+//    }
+//    
+//    @PostMapping("/welcome")
+//    public String userLogin(@ModelAttribute LoginService loginService) 
+//    {   
+//        User user = userRepo.findByUsername(loginService.getUsername());
+//        
+//        return "redirect:/design";
+//    }
 }

@@ -46,6 +46,27 @@ public class User implements UserDetails {
     private String zip;
     @Column(name="phone_number")
     private String phoneNumber;
+    
+    public User(
+            String username, 
+            String password, 
+            String fullname, 
+            String street, 
+            String city, 
+            String state,
+            String zip, 
+            String phoneNumber) {
+        
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+        
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -54,17 +75,17 @@ public class User implements UserDetails {
 
     }
 
-    @Override
-    public String getPassword() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+//    @Override
+//    public String getPassword() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 
-    @Override
-    public String getUsername() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+//    @Override
+//    public String getUsername() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -88,20 +109,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         // TODO Auto-generated method stub
         return true;
-    }
-
-    public User(String username, String password, String fullname, String street, String city, String state,
-            String zip, String phoneNumber) {
-        
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.phoneNumber = phoneNumber;
-
     }
 
     @Override
