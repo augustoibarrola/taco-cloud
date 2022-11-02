@@ -42,12 +42,13 @@ public class RegistrationController {
     }
     
     @PostMapping
-    public String processRegistration(RegistrationService form) {
+    public String processRegistration(RegistrationService registrationService) {
         
-        log.info(form.toString());
+        log.info(registrationService.toString());
         
-        //      userRepo.save(form.toUser(passwordEncoder));
-      return "redirect:/login";
+        userRepo.save(registrationService.toUser(passwordEncoder));
+      
+        return "redirect:/login";
     }
 
 //    @PostMapping
