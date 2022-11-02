@@ -22,36 +22,47 @@ public class RegistrationController {
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
     
-    public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) {
+    public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) 
+    {   
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
     
+//    @GetMapping
+//    public String registerForm(Model model) 
+//    {   
+//        model.addAttribute(new RegistrationService());
+//        
+//        return "registration";
+//    }
+    
     @GetMapping
-    public String registerForm(Model model) {
-        
-        model.addAttribute(new RegistrationService());
-        return "registration";
-    }
-
-    @PostMapping
-    public String processRegistration(@ModelAttribute RegistrationService registrationService) {
-        log.info(registrationService.toString());
-        log.info(registrationService.toUser(passwordEncoder).toString());
-        userRepo.save(registrationService.toUser(passwordEncoder));
-        
-        return "redirect:/";
+    public String registerForm() {
+      return "registration";
     }
     
-    @PostMapping("/welcome")
-    public String userLogin(@ModelAttribute LoginService loginService) {
+    @PostMapping
+    public String processRegistration(RegistrationService form) {
         
-        log.info(loginService.toString());
+        log.info(form.toString());
         
-        User user = userRepo.findByUsername(loginService.getUsername());
-        
-        log.info(user.toString());
-        
-        return "redirect:/design";
+        //      userRepo.save(form.toUser(passwordEncoder));
+      return "redirect:/login";
     }
+
+//    @PostMapping
+//    public String processRegistration(@ModelAttribute RegistrationService registrationService) 
+//    {    
+//        userRepo.save(registrationService.toUser(passwordEncoder));
+//        
+//        return "redirect:/";
+//    }
+//    
+//    @PostMapping("/welcome")
+//    public String userLogin(@ModelAttribute LoginService loginService) 
+//    {   
+//        User user = userRepo.findByUsername(loginService.getUsername());
+//        
+//        return "redirect:/design";
+//    }
 }
