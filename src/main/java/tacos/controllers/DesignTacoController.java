@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.hateoas.EntityLinks;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +70,10 @@ public class DesignTacoController {
     }
     
     @GetMapping("/{id}")
-    public Taco tacoById(@PathVariable("id") String id) {
+    public ResponseEntity<Taco> tacoById(@PathVariable("id") String id) {
         Optional<Taco> optTaco = tacoRepo.findById(id);
-        if (optTaco.isPresent()) return optTaco.get();
-        return null;
+        if (optTaco.isPresent()) return new ResponseEntity<>(optTaco.get(), HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
 }
